@@ -35,7 +35,7 @@ const Index = () => {
     },
     {
       degree: "10th Grade",
-      institution: "Saint Xavier’s High School",
+      institution: "Saint Xavier's High School",
       duration: "2017 - 2019",
       percentage: "85.6%",
     },
@@ -806,5 +806,3 @@ const Index = () => {
 };
 
 export default Index;
-
-</edits_to_apply>
