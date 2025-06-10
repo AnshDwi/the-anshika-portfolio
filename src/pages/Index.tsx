@@ -150,6 +150,18 @@ const Index = () => {
     alert("Thank you for your message! I'll get back to you soon.");
   };
 
+  // Function to handle resume download
+  const handleResumeDownload = () => {
+    console.log('Resume download initiated');
+    // Create a link element and trigger download
+    const link = document.createElement('a');
+    link.href = '/lovable-uploads/0cc3f690-a77d-4869-b69b-be1b09f37c82.png'; // This will be updated when resume PDF is available
+    link.download = 'Anshika_Dwivedi_Resume.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode);
     document.documentElement.classList.toggle('dark');
@@ -227,6 +239,17 @@ const Index = () => {
           </div>
 
           <div className="flex items-center space-x-3">
+            {/* Resume Download Button */}
+            <motion.button
+              onClick={handleResumeDownload}
+              className="hidden sm:flex items-center space-x-2 px-3 py-2 bg-gradient-to-r from-purple-500 to-cyan-500 text-white rounded-lg hover:from-purple-600 hover:to-cyan-600 transition-all duration-300 text-sm font-medium"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Download className="w-4 h-4" />
+              <span>Resume</span>
+            </motion.button>
+
             {/* Theme Color Switcher */}
             <div className="flex space-x-1">
               {Object.entries(themes).map(([theme, gradient]) => (
@@ -308,6 +331,7 @@ const Index = () => {
               </Button>
               
               <Button 
+                onClick={handleResumeDownload}
                 variant="outline"
                 className="border-2 border-primary/30 backdrop-blur-sm bg-background/30 hover:bg-background/50 py-3 px-8 rounded-full"
               >
@@ -393,17 +417,13 @@ const Index = () => {
                     className={`absolute -inset-4 bg-gradient-to-r ${themes[currentTheme]} rounded-full opacity-30 blur-xl`}
                   />
                   <div className="relative w-80 h-80 rounded-full overflow-hidden backdrop-blur-lg bg-white/20 dark:bg-black/20 border-4 border-white/30 shadow-2xl">
-                    <div className="w-full h-full flex items-center justify-center">
-                      <motion.div
-                        animate={{ scale: [1, 1.1, 1] }}
-                        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                        className="w-32 h-32 bg-white/30 dark:bg-black/30 rounded-full flex items-center justify-center backdrop-blur-sm"
-                      >
-                        <span className={`text-6xl font-bold bg-gradient-to-r ${themes[currentTheme]} bg-clip-text text-transparent`}>
-                          AD
-                        </span>
-                      </motion.div>
-                    </div>
+                    <img
+                      src="/lovable-uploads/da65fe23-7f97-486e-830d-efb72e168a18.png"
+                      alt="Anshika Dwivedi"
+                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+                    />
+                    {/* Glowing overlay on hover */}
+                    <div className={`absolute inset-0 bg-gradient-to-r ${themes[currentTheme].replace('from-', 'from-').replace('via-', 'via-').replace('to-', 'to-')}/20 opacity-0 hover:opacity-100 transition-opacity duration-300 rounded-full`}></div>
                   </div>
                 </div>
               </motion.div>
@@ -689,6 +709,17 @@ const Index = () => {
                     </div>
                   </div>
                 </div>
+                
+                {/* Resume Download Button in Contact Section */}
+                <motion.div className="mt-6">
+                  <Button
+                    onClick={handleResumeDownload}
+                    className={`w-full bg-gradient-to-r ${themes[currentTheme]} hover:opacity-90 text-white font-semibold py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300`}
+                  >
+                    <Download className="w-5 h-5 mr-2" />
+                    Download Resume
+                  </Button>
+                </motion.div>
               </div>
             </motion.div>
             
@@ -806,3 +837,5 @@ const Index = () => {
 };
 
 export default Index;
+
+</edits_to_apply>

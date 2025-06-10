@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, Linkedin, Code, MapPin, Download } from 'lucide-react';
@@ -46,7 +45,13 @@ const Profile = () => {
 
   const handleResumeDownload = () => {
     console.log('Resume download initiated');
-    alert('Resume download feature - Please add your resume PDF link here');
+    // Create a link element and trigger download
+    const link = document.createElement('a');
+    link.href = '/lovable-uploads/0cc3f690-a77d-4869-b69b-be1b09f37c82.png'; // This will be updated when resume PDF is available
+    link.download = 'Anshika_Dwivedi_Resume.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
@@ -232,23 +237,13 @@ const Profile = () => {
                   transition={{ duration: 0.3 }}
                   className="relative w-80 h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden shadow-2xl bg-gradient-to-br from-purple-100 to-cyan-100 dark:from-purple-900 dark:to-cyan-900 border-4 border-white dark:border-gray-700"
                 >
-                  {/* Placeholder for profile image */}
-                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-purple-200 via-cyan-200 to-yellow-200 dark:from-purple-800 dark:via-cyan-800 dark:to-yellow-800">
-                    <div className="text-center space-y-4">
-                      <motion.div
-                        animate={{ scale: [1, 1.1, 1] }}
-                        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                        className="w-24 h-24 bg-white dark:bg-gray-700 rounded-full mx-auto flex items-center justify-center shadow-lg"
-                      >
-                        <span className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-cyan-600 bg-clip-text text-transparent">
-                          AD
-                        </span>
-                      </motion.div>
-                      <p className="text-gray-600 dark:text-gray-300 font-medium">
-                        Profile Photo
-                      </p>
-                    </div>
-                  </div>
+                  <img
+                    src="/lovable-uploads/da65fe23-7f97-486e-830d-efb72e168a18.png"
+                    alt="Anshika Dwivedi Profile"
+                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+                  />
+                  {/* Glowing overlay on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 via-cyan-500/20 to-yellow-500/20 opacity-0 hover:opacity-100 transition-opacity duration-300 rounded-full"></div>
                 </motion.div>
 
                 {/* Floating elements */}
