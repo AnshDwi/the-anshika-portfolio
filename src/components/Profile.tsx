@@ -11,41 +11,88 @@ const Profile = () => {
       label: 'Email',
       value: 'anshikadwivedi2004@gmail.com',
       href: 'mailto:anshikadwivedi2004@gmail.com',
-      color: 'text-red-500'
+      color: 'text-red-500',
+      bgColor: 'bg-red-100 dark:bg-red-900/30',
+      borderColor: 'border-red-200 dark:border-red-800'
     },
     {
       icon: Phone,
       label: 'Phone',
       value: '+91-7057733814',
       href: 'tel:+917057733814',
-      color: 'text-green-500'
+      color: 'text-green-500',
+      bgColor: 'bg-green-100 dark:bg-green-900/30',
+      borderColor: 'border-green-200 dark:border-green-800'
     },
     {
       icon: Linkedin,
       label: 'LinkedIn',
       value: 'anshika-dwivedi-319b75220',
       href: 'https://linkedin.com/in/anshika-dwivedi-319b75220',
-      color: 'text-blue-500'
+      color: 'text-blue-500',
+      bgColor: 'bg-blue-100 dark:bg-blue-900/30',
+      borderColor: 'border-blue-200 dark:border-blue-800'
     },
     {
       icon: Code,
       label: 'HackerRank',
       value: 'anshikadwivedi21',
       href: 'https://hackerrank.com/anshikadwivedi21',
-      color: 'text-emerald-500'
+      color: 'text-emerald-500',
+      bgColor: 'bg-emerald-100 dark:bg-emerald-900/30',
+      borderColor: 'border-emerald-200 dark:border-emerald-800'
     }
   ];
 
   const handleResumeDownload = () => {
-    // In a real implementation, this would link to the actual resume PDF
     console.log('Resume download initiated');
-    // You can replace this with actual resume download logic
     alert('Resume download feature - Please add your resume PDF link here');
   };
 
   return (
-    <section id="profile" className="py-20 bg-gradient-to-br from-purple-50 via-white to-cyan-50 dark:from-gray-900 dark:via-gray-800 dark:to-purple-900">
-      <div className="container mx-auto px-4">
+    <section id="profile" className="py-20 bg-gradient-to-br from-purple-50 via-white to-cyan-50 dark:from-gray-900 dark:via-gray-800 dark:to-purple-900 relative overflow-hidden">
+      {/* Animated background decorations */}
+      <div className="absolute inset-0 pointer-events-none">
+        <motion.div
+          animate={{ 
+            rotate: 360,
+            scale: [1, 1.2, 1],
+          }}
+          transition={{ 
+            rotate: { duration: 20, repeat: Infinity, ease: "linear" },
+            scale: { duration: 6, repeat: Infinity, ease: "easeInOut" }
+          }}
+          className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-purple-400/30 to-pink-400/30 rounded-full blur-xl"
+        />
+        <motion.div
+          animate={{ 
+            rotate: -360,
+            x: [0, 50, 0],
+            y: [0, -30, 0]
+          }}
+          transition={{ 
+            rotate: { duration: 25, repeat: Infinity, ease: "linear" },
+            x: { duration: 8, repeat: Infinity, ease: "easeInOut" },
+            y: { duration: 6, repeat: Infinity, ease: "easeInOut" }
+          }}
+          className="absolute top-1/3 right-16 w-24 h-24 bg-gradient-to-r from-yellow-400/40 to-orange-400/40 rounded-full blur-lg"
+        />
+        <motion.div
+          animate={{ 
+            scale: [1, 1.3, 1],
+            opacity: [0.4, 0.7, 0.4],
+            rotate: [0, 180, 360]
+          }}
+          transition={{ 
+            duration: 8, 
+            repeat: Infinity, 
+            ease: "easeInOut" 
+          }}
+          className="absolute bottom-32 left-1/4 w-28 h-28 bg-gradient-to-r from-cyan-400/35 to-blue-400/35 rounded-full blur-2xl"
+        />
+      </div>
+
+      <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -120,9 +167,9 @@ const Profile = () => {
                       transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
                       viewport={{ once: true }}
                       whileHover={{ scale: 1.02, x: 10 }}
-                      className="flex items-center space-x-4 p-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700 group"
+                      className={`flex items-center space-x-4 p-4 ${contact.bgColor} rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border-2 ${contact.borderColor} group backdrop-blur-sm`}
                     >
-                      <div className={`p-3 rounded-lg bg-gray-50 dark:bg-gray-700 group-hover:scale-110 transition-transform duration-300`}>
+                      <div className={`p-3 rounded-lg bg-white dark:bg-gray-700 group-hover:scale-110 transition-transform duration-300 shadow-md`}>
                         <contact.icon className={`w-6 h-6 ${contact.color}`} />
                       </div>
                       <div className="flex-1 min-w-0">
@@ -134,7 +181,7 @@ const Profile = () => {
                         </p>
                       </div>
                       <div className="flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <div className="w-2 h-2 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full"></div>
+                        <div className={`w-3 h-3 ${contact.color.replace('text-', 'bg-')} rounded-full animate-pulse`}></div>
                       </div>
                     </motion.a>
                   ))}
@@ -150,7 +197,7 @@ const Profile = () => {
               >
                 <Button
                   onClick={handleResumeDownload}
-                  className="w-full sm:w-auto bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 text-white font-semibold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                  className="w-full sm:w-auto bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 text-white font-semibold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 border-2 border-purple-300 dark:border-purple-600"
                 >
                   <Download className="w-5 h-5 mr-2" />
                   Download Resume
@@ -171,12 +218,12 @@ const Profile = () => {
                 <motion.div
                   animate={{ rotate: 360 }}
                   transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                  className="absolute -inset-8 bg-gradient-to-r from-purple-400 via-cyan-400 to-yellow-400 rounded-full opacity-20 blur-xl"
+                  className="absolute -inset-8 bg-gradient-to-r from-purple-400 via-cyan-400 to-yellow-400 rounded-full opacity-30 blur-xl"
                 />
                 <motion.div
                   animate={{ rotate: -360 }}
                   transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                  className="absolute -inset-4 bg-gradient-to-r from-yellow-400 via-purple-400 to-cyan-400 rounded-full opacity-30 blur-lg"
+                  className="absolute -inset-4 bg-gradient-to-r from-yellow-400 via-purple-400 to-cyan-400 rounded-full opacity-40 blur-lg"
                 />
                 
                 {/* Profile image container */}
@@ -188,11 +235,15 @@ const Profile = () => {
                   {/* Placeholder for profile image */}
                   <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-purple-200 via-cyan-200 to-yellow-200 dark:from-purple-800 dark:via-cyan-800 dark:to-yellow-800">
                     <div className="text-center space-y-4">
-                      <div className="w-24 h-24 bg-white dark:bg-gray-700 rounded-full mx-auto flex items-center justify-center shadow-lg">
+                      <motion.div
+                        animate={{ scale: [1, 1.1, 1] }}
+                        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                        className="w-24 h-24 bg-white dark:bg-gray-700 rounded-full mx-auto flex items-center justify-center shadow-lg"
+                      >
                         <span className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-cyan-600 bg-clip-text text-transparent">
                           AD
                         </span>
-                      </div>
+                      </motion.div>
                       <p className="text-gray-600 dark:text-gray-300 font-medium">
                         Profile Photo
                       </p>
@@ -215,6 +266,14 @@ const Profile = () => {
                   animate={{ rotate: [0, 180, 360] }}
                   transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
                   className="absolute top-8 -left-8 w-4 h-4 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full shadow-lg"
+                />
+                <motion.div
+                  animate={{ 
+                    scale: [1, 1.2, 1],
+                    rotate: [0, 90, 180, 270, 360]
+                  }}
+                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute bottom-8 -right-8 w-5 h-5 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full shadow-lg"
                 />
               </div>
             </motion.div>
